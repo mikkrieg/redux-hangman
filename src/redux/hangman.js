@@ -4,7 +4,7 @@ const hangmanState = {
   lettersCorrect: "e", //[]
   isGameOver: false,
   limit: 10
-}
+};
 
 export function guessLetter(letter) {
   return {
