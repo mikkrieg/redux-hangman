@@ -1,7 +1,7 @@
-const state = {
+const hangmanState = {
   word: "epicodus", // [e, etc]
   numGuesses: 0,
-  lettersCorrect: "", //[]
+  lettersCorrect: "e", //[]
   isGameOver: false,
   limit: 10
 }
@@ -13,7 +13,7 @@ export function guessLetter(letter) {
   }
 }
 
-export default function hangmanReducer(state, action) {
+export default function hangmanReducer(state = hangmanState, action) {
   switch(action.type) {
     case "GUESS":
 
