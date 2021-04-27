@@ -13,7 +13,7 @@ export function guessLetter(letter) {
   }
 }
 
-export default function wordReducer(state, action) {
+export default function hangmanReducer(state, action) {
   switch(action.type) {
     case "GUESS":
 
