@@ -59,11 +59,18 @@ function App(props) {
       {console.log(gameOverMsg() !== undefined ? gameOverMsg().toLowerCase() : "notDone")}
       <h1>Welcome To Hangman</h1>
       <h1 className="grow">Number of Guesses Remaining: {props.limit() - props.numGuesses}</h1>
-      <h1 
-        className={gameOverMsg() !== undefined ? gameOverMsg().toLowerCase() : "notDone"}
-        >
-          YOU {gameOverMsg()}
-      </h1>
+      <Grid
+        container 
+        justify="center"
+        alignItems="center" 
+      >
+        <h1 
+          className={gameOverMsg() !== undefined ? gameOverMsg().toLowerCase() : "notDone"}
+          >
+            YOU {gameOverMsg()}
+        </h1>
+      </Grid>
+     
       <h2 className="word">{renderHangMan(props.word)}</h2>
       <br />
       <br />
