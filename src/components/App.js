@@ -1,11 +1,9 @@
 import React from "react";
+import { connect } from "react-redux";
+import { guessLetter, resetGame } from "../redux/hangman";
 import Button from "@material-ui/core/Button";
 import Container from "@material-ui/core/Container";
 import Grid from "@material-ui/core/Grid";
-import { connect } from "react-redux";
-import { guessLetter } from "../redux/hangman";
-
-import "../css/App.css";
 
 function App(props) {
   let abc = "abcdefghijklmnopqrstuvwxyz".split("");
@@ -26,7 +24,7 @@ function App(props) {
             size="large" 
             id={index} 
             className="letter-btn"
-            onClick={() => console.log(props.guessLetter(letter))}
+            onClick={() => props.guessLetter(letter)}
             disabled={props.lettersCorrect.includes(letter) || props.lettersIncorrect.includes(letter) || props.isGameOver}
             >
               {letter.toUpperCase()}
@@ -44,20 +42,43 @@ function App(props) {
             <span className="guesses grow">{letter.toUpperCase()}</span>;
   })
 
+  let gameOverMsg = () => {
+    if(props.isGameOver || props.isWinner()) {
+      if(props.isWinner()) {
+        return "WON"
+      } else {
+        return "LOST"
+      }
+    }
+  }
+  
+
   return (
     <Container maxWidth="sm" className="game">
+      {console.log(props)}
+      {console.log(gameOverMsg() !== undefined ? gameOverMsg().toLowerCase() : "notDone")}
       <h1>Welcome To Hangman</h1>
-      <h1 className="grow">Number of Guesses Remaining: {props.limit - props.numGuesses}</h1>
-      <h1 className={props.isGameOver ? "gameover-true" : "gameover-false"}>{props.isGameOver ? "GAME OVER" : "nah"}</h1>
+      <h1 className="grow">Number of Guesses Remaining: {props.limit() - props.numGuesses}</h1>
+      <h1 
+        className={gameOverMsg() !== undefined ? gameOverMsg().toLowerCase() : "notDone"}
+        >
+          YOU {gameOverMsg()}
+      </h1>
       <h2 className="word">{renderHangMan(props.word)}</h2>
       <br />
       <br />
       <Grid container spacing={1}>
         {renderLetterButtons(abc)}
-      </Grid>
-    
+        <Grid 
+          container 
+          justify="center"
+          alignItems="center" 
+        >
+          <Button variant="contained" color="secondary" onClick={() => props.resetGame()} > Ragequit Reset </Button>
+        </Grid>
+      </Grid>      
     </Container>
-  );
+    );
 }
 
 function mapStateToProps(state) {
@@ -67,12 +88,15 @@ function mapStateToProps(state) {
     lettersCorrect: state.lettersCorrect, //[]
     isGameOver: state.isGameOver,
     limit: state.limit,
-    lettersIncorrect: state.lettersIncorrect
+    lettersIncorrect: state.lettersIncorrect,
+    isWinner: state.isWinner,
+
   }
 }
 
 const mapDispatchToProps = {
-  guessLetter: guessLetter
+  guessLetter: guessLetter,
+  resetGame: resetGame,
 }
 
 // connect(Parts of State you need, Actions you want to perform)

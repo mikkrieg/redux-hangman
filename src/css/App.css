@@ -11,15 +11,36 @@
   color: rgba(255, 140, 200, 0.7);
 }
 
-.gameover-false {
+.won {
+  background: green;
+}
+
+.lost {
+  background: #f50a57;
+}
+
+.won, .lost {
+  margin: 1rem 0 0 0;
+  color: white;
+  padding-top: 1rem;
+  animation: msg .45s;
+  width: 10rem; height: 4rem;
+  border-radius: 2rem;
+}
+
+.notDone {
   font-size: 0px;
 }
 
-.gameover-true {
-  color: red;
-  animation: createGameOver .45s;
-  font-size: 5rem;
+@keyframes msg {
+  from {
+    transform: scale(0);
+  }
+  to {
+    transform: scale(1);
+  }
 }
+
 @keyframes createGameOver {
   from {
     transform: scale(0);
@@ -69,6 +90,7 @@ h1 {
   font-size: calc(10px + 2vmin);
   color: white;
 }
+
 
 
 
@@ -133,4 +155,6 @@ body{
     }
   }
 
-  
+  .reset {
+    align-content: center;
+  }
