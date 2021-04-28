@@ -1,4 +1,4 @@
-import redux, { createStore } from "redux";
+import { createStore } from "redux";
 import hangmanReducer from "./hangman";
 
 const store =  createStore(hangmanReducer);
