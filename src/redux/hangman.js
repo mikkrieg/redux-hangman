@@ -1,7 +1,8 @@
 const hangmanState = {
   word: "epicodus", // [e, etc]
   numGuesses: 0,
-  lettersCorrect: "e", //[]
+  lettersCorrect: "", //[]
+  lettersIncorrect: "",
   isGameOver: false,
   limit: 10
 };
@@ -27,8 +28,9 @@ export default function hangmanReducer(state = hangmanState, action) {
       return {
         ...state,
         numGuesses: state.numGuesses + 1,
-        isGameOver: (state.word.sort() === state.lettersCorrect.sort() ? true : false) || (state.numGuesses === state.limit ? true : false),
-        lettersCorrect: state.lettersCorrect += letters
+        isGameOver: (state.word.split("").sort().join("") === state.lettersCorrect.split("").sort().join("") ? true : false) || (state.numGuesses >= state.limit ? true : false),
+        lettersCorrect: state.lettersCorrect += letters,
+        lettersIncorrect: state.lettersIncorrect += (!state.lettersCorrect.includes(action.payload) ? action.payload : '')
       }
     default:
       return state;

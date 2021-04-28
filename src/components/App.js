@@ -19,12 +19,14 @@ function App(props) {
     return (
       <Grid item xs={2}>
         <Button
+          key={index}
           color="primary" 
           variant="contained" 
           size="large" 
           id={index} 
           className="letter-btn"
-          /* onClick={(addStyle(index))} */
+          onClick={() => console.log(props.guessLetter(letter))}
+          disabled={props.lettersCorrect.includes(letter) || props.lettersIncorrect.includes(letter)}
           >
             {letter.toUpperCase()}
         </Button>
@@ -41,9 +43,10 @@ function App(props) {
   })
 
   return (
-    <Container maxWidth="sm">
+    <Container maxWidth="sm" className="game">
       <h1>Welcome To Hangman</h1>
       <h1 className="grow">Number of Guesses: {props.numGuesses}</h1>
+      <h1>Game Over: {props.isGameOver.toString()}</h1>
       <h2 className="word">{renderHangMan(props.word)}</h2>
       <br />
       <br />
@@ -62,12 +65,13 @@ function mapStateToProps(state) {
     numGuesses: state.numGuesses,
     lettersCorrect: state.lettersCorrect, //[]
     isGameOver: state.isGameOver,
-    limit: state.limit
+    limit: state.limit,
+    lettersIncorrect: state.lettersIncorrect
   }
 }
 
 const mapDispatchToProps = {
-  guess: guessLetter
+  guessLetter: guessLetter
 }
 
 // connect(Parts of State you need, Actions you want to perform)

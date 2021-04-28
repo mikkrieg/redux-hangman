@@ -1,4 +1,4 @@
-"".App {
+.App {
   text-align: center;
 }
 
@@ -12,10 +12,9 @@
 }
 h1 {
   color: rgba(255, 255, 255, 0.8);
-
   z-index: 21;
   position:relative;
-  left: 6vw;
+  text-align: center;
 }
 
 .guesses {
@@ -40,9 +39,6 @@ h1 {
 
 .letter-btn:hover {
   color: yellow;
-}
-.letter-btn.selected {
-  color: rgb(255, 0, 0);
 }
 .App-header {
   background-color: #282c34;
@@ -78,7 +74,6 @@ h1 {
 }
 
 body{
-
     font-family: 'Exo', sans-serif;
 }
 
@@ -138,8 +133,8 @@ body{
 
 .circles li:nth-child(2){
     left: 10%;
-    width: 20px;
-    height: 20px;
+    width: 200px;
+    height: 200px;
     animation-delay: 2s;
     animation-duration: 12s;
 }
