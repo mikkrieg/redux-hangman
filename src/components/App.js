@@ -9,28 +9,30 @@ import "../css/App.css";
 
 function App(props) {
   let abc = "abcdefghijklmnopqrstuvwxyz".split("");
-  function addStyle(id) {
-    document.getElementById(id).classList.add("shrink");
+  // function addStyle(id) {
+  //   document.getElementById(id).classList.add("shrink");
 
-    ///document.getElementById(id).style.width= keg.volume + "px";
-  }
+  //   ///document.getElementById(id).style.width= keg.volume + "px";
+  // }
   let renderLetterButtons = (abc) => abc.map((letter, index) => {
     
     return (
-      <Grid item xs={2}>
-        <Button
-          key={index}
-          color="primary" 
-          variant="contained" 
-          size="large" 
-          id={index} 
-          className="letter-btn"
-          onClick={() => console.log(props.guessLetter(letter))}
-          disabled={props.lettersCorrect.includes(letter) || props.lettersIncorrect.includes(letter)}
-          >
-            {letter.toUpperCase()}
-        </Button>
-      </Grid>
+      <>
+        <Grid item xs={2}> {/* xs sm md lg xl */}
+          <Button
+            key={index}
+            color="primary" 
+            variant="contained" 
+            size="large" 
+            id={index} 
+            className="letter-btn"
+            onClick={() => console.log(props.guessLetter(letter))}
+            disabled={props.lettersCorrect.includes(letter) || props.lettersIncorrect.includes(letter) || props.isGameOver}
+            >
+              {letter.toUpperCase()}
+          </Button>
+        </Grid>
+      </>
     )
 
   });
@@ -45,15 +47,14 @@ function App(props) {
   return (
     <Container maxWidth="sm" className="game">
       <h1>Welcome To Hangman</h1>
-      <h1 className="grow">Number of Guesses: {props.numGuesses}</h1>
-      <h1>Game Over: {props.isGameOver.toString()}</h1>
+      <h1 className="grow">Number of Guesses Remaining: {props.limit - props.numGuesses}</h1>
+      <h1 className={props.isGameOver ? "gameover-true" : "gameover-false"}>{props.isGameOver ? "GAME OVER" : "nah"}</h1>
       <h2 className="word">{renderHangMan(props.word)}</h2>
       <br />
       <br />
       <Grid container spacing={1}>
         {renderLetterButtons(abc)}
       </Grid>
-      
     
     </Container>
   );

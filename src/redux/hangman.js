@@ -4,7 +4,7 @@ const hangmanState = {
   lettersCorrect: "", //[]
   lettersIncorrect: "",
   isGameOver: false,
-  limit: 10
+  limit: "epicodus".length + 5
 };
 
 export function guessLetter(letter) {
@@ -13,7 +13,6 @@ export function guessLetter(letter) {
     payload: letter
   }
 }
-
 export default function hangmanReducer(state = hangmanState, action) {
   switch(action.type) {
     case "GUESS":
@@ -28,7 +27,8 @@ export default function hangmanReducer(state = hangmanState, action) {
       return {
         ...state,
         numGuesses: state.numGuesses + 1,
-        isGameOver: (state.word.split("").sort().join("") === state.lettersCorrect.split("").sort().join("") ? true : false) || (state.numGuesses >= state.limit ? true : false),
+        isGameOver: (state.word.split("").sort().join("") === state.lettersCorrect
+        .split("").sort().join("") ? true : false) || ((state.numGuesses + 1) === state.limit ? true : false),
         lettersCorrect: state.lettersCorrect += letters,
         lettersIncorrect: state.lettersIncorrect += (!state.lettersCorrect.includes(action.payload) ? action.payload : '')
       }
