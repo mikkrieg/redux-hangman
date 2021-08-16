@@ -81,7 +81,7 @@ function App(props) {
           justify="center"
           alignItems="center" 
         >
-          <Button variant="contained" color="secondary" onClick={() => props.resetGame()} > Ragequit Reset </Button>
+          <Button variant="contained" color="secondary" onClick={() => props.resetGame()} > Reset </Button>
         </Grid>
       </Grid>      
     </Container>
