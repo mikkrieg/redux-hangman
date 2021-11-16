@@ -1,22 +1,31 @@
-import React from "react";
+import React, { useState } from "react";
 import { connect } from "react-redux";
 import { guessLetter, resetGame } from "../redux/hangman";
-import Button from "@material-ui/core/Button";
-import Container from "@material-ui/core/Container";
-import Grid from "@material-ui/core/Grid";
+import Typography from '@mui/material/Typography';
+import Button from "@mui/material/Button";
+import Container from "@mui/material/Container";
+import Grid from "@mui/material/Grid";
 
 function App(props) {
-  let abc = "abcdefghijklmnopqrstuvwxyz".split("");
-  // function addStyle(id) {
-  //   document.getElementById(id).classList.add("shrink");
+  const [bigScreen, setBigScreen] = useState(false);
 
-  //   ///document.getElementById(id).style.width= keg.volume + "px";
-  // }
+  const windowListener = () => {
+    if(window.innerWidth > 960) {
+      setBigScreen(true);
+    } else {
+      setBigScreen(false);
+    }
+  }
+
+  window.onresize = windowListener;
+
+  let abc = "abcdefghijklmnopqrstuvwxyz".split("");
+
   let renderLetterButtons = (abc) => abc.map((letter, index) => {
     
     return (
       <>
-        <Grid item xs={2}> {/* xs sm md lg xl */}
+        <Grid item xs={3} md={2}> {/* xs sm md lg xl */}
           <Button
             key={index}
             color="primary" 
@@ -57,8 +66,37 @@ function App(props) {
     <Container maxWidth="sm" className="game">
       {console.log(props)}
       {console.log(gameOverMsg() !== undefined ? gameOverMsg().toLowerCase() : "notDone")}
-      <h1>Welcome To Hangman</h1>
-      <h1 className="grow">Number of Guesses Remaining: {props.limit() - props.numGuesses}</h1>
+      <Typography 
+        variant='h1'
+        pt={4}
+        sx={{
+          color: '#FFF',
+          fontFamily: 'Exo, sans-serif',
+          zIndex: 21,
+          fontSize: {
+            xs: '1.6em', 
+            md: '3em'
+          },
+          position: 'relative',
+          textAlign: 'center'
+        }}
+      >
+        Welcome To Hangman
+      </Typography>
+      <Typography
+        className={ bigScreen ? 'grow' : ''}
+        variant='h1'
+        mt={2}
+        mb={-2}
+        sx={{
+          fontSize: {
+            xs: '2em', 
+            md: '4em'
+          }
+        }}
+      >
+        Number of Guesses Remaining: {props.limit() - props.numGuesses}
+      </Typography>
       <Grid
         container 
         justify="center"
