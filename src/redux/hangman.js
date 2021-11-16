@@ -1,4 +1,4 @@
-import wordBank from "../data/wordBank"
+import wordBank from "../data/wordBank";
 
 const hangmanState = {
   word: wordBank[Math.floor(Math.random() * (wordBank.length - 1))], // [e, etc]
