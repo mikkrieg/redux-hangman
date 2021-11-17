@@ -11,7 +11,7 @@ import Grid from "@mui/material/Grid";
 
 function App(props) {
   const [bigScreen, setBigScreen] = useState(false);
-  const { openInstructions, setOpenInstructions, setOpenLoser, openLoser } = useContext(AppContext);
+  const { openInstructions, setOpenInstructions, setOpenFinish, openFinish, setLose } = useContext(AppContext);
 
   const windowListener = () => {
     if(window.innerWidth > 960) {
@@ -20,7 +20,7 @@ function App(props) {
       setBigScreen(false);
     }
   }
-
+  console.log(window.innerWidth)
   window.onresize = windowListener;
 
   const openInstructionModal = () => {
@@ -34,7 +34,7 @@ function App(props) {
       console.log('runs')
       return (
         <>
-          <Grid item xs={3} md={2}> {/* xs sm md lg xl */}
+          <Grid item xs={3} md={2} justify='center'>
             <Button
               key={index}
               color="primary" 
@@ -46,7 +46,7 @@ function App(props) {
               disabled={props.lettersCorrect.includes(letter) || props.lettersIncorrect.includes(letter) || props.isGameOver}
               sx={{
                 display: 'flex',
-                marginLeft: { xs: 9, sm: 17.5, md: 23.5}
+                marginLeft: { xs: 9.1, sm: 12.5, md: 24.3}
               }}
               >
                 {letter.toUpperCase()}
@@ -57,7 +57,7 @@ function App(props) {
     } else {
       return (
         <>
-          <Grid item xs={3} md={2}> {/* xs sm md lg xl */}
+          <Grid item xs={3} md={2} justify='center'> {/* xs sm md lg xl */}
             <Button
               key={index}
               color="primary" 
@@ -67,6 +67,9 @@ function App(props) {
               className="letter-btn"
               onClick={() => props.guessLetter(letter)}
               disabled={props.lettersCorrect.includes(letter) || props.lettersIncorrect.includes(letter) || props.isGameOver}
+              sx={{
+                marginLeft: { md: 1}
+              }}
               >
                 {letter.toUpperCase()}
             </Button>
@@ -83,11 +86,15 @@ function App(props) {
             <span className={ bigScreen ? "guesses" : 'mobile-guess'}>{letter.toUpperCase()}</span>;
   })
 
-  let gameOverMsg = () => {
+  let gameOver = () => {
     if(props.isGameOver || props.isWinner()) {
       if(props.isWinner()) {
+        setLose(false);
+        setOpenFinish(true);
         return "WON"
       } else {
+        setOpenFinish(true);
+        setLose(true);
         return "LOST"
       }
     }
@@ -97,7 +104,7 @@ function App(props) {
   return (
     <Container maxWidth="sm" className="game">
       {console.log(props)}
-      {console.log(gameOverMsg() !== undefined ? gameOverMsg().toLowerCase() : "notDone")}
+      {/* {console.log(gameOverMsg() !== undefined ? gameOverMsg().toLowerCase() : "notDone")} */}
       <Typography 
         variant='h1'
         sx={{
@@ -145,11 +152,11 @@ function App(props) {
         justify="center"
         alignItems="center" 
       >
-        <h1 
+        {/* <h1 
           className={gameOverMsg() !== undefined ? gameOverMsg().toLowerCase() : "notDone"}
           >
             YOU {gameOverMsg()}
-        </h1>
+        </h1> */}
       </Grid>
       <Typography className="word" variant='h2' mt={3} sx={{ fontSize: '1.5em', fontWeight: 'bold'}}>{renderHangMan(props.word)}</Typography>
       <br />
@@ -161,10 +168,10 @@ function App(props) {
           justify="center"
           alignItems="center" 
         >
-          <Button sx={{margin: 'auto', marginTop: '10px', display: 'flex'}} variant="contained" color="error" onClick={() => props.resetGame()} > Reset </Button>
+          <Button sx={{margin: 'auto', marginTop: '20px', display: 'flex'}} variant="contained" color="error" size='large' onClick={() => props.resetGame()} > Reset </Button>
         </Grid>
       </Grid>
-      <EndModal />
+      <EndModal message={gameOver()} reset={props.resetGame} word={props.word} />
       <InstructionModal />      
     </Container>
     );

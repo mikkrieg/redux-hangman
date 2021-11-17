@@ -6,15 +6,18 @@ export const AppContext = React.createContext();
 export const AppProvider = ({children}) => {
 
   const [ openInstructions, setOpenInstructions ] = useState(false);
-  const [ openLoser, setOpenLoser ] = useState(false);
+  const [ openFinish, setOpenFinish ] = useState(false);
+  const [ lose, setLose ] = useState(false);
 
   return (
     <AppContext.Provider value=
     {{
       openInstructions,
       setOpenInstructions,
-      openLoser, 
-      setOpenLoser,
+      openFinish, 
+      setOpenFinish,
+      lose,
+      setLose
       }}
     >
       {children}

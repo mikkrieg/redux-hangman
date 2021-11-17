@@ -19,9 +19,9 @@
   border-radius: 2rem;
 }
 
-.notDone {
+/* .notDone {
   font-size: 0px;
-}
+} */
 
 @keyframes msg {
   from {
