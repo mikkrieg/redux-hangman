@@ -164,7 +164,17 @@ function App(props) {
       >
         Remaining Guesses: {props.limit() - props.numGuesses}
       </Typography>
-      <Typography className="word" variant='h2' mt={3} sx={{ fontSize: '1.5em', fontWeight: 'bold'}}>{renderHangMan(props.word)}</Typography>
+      <Typography 
+      className="word" 
+      variant='h2' 
+      mt={3} 
+      sx={{ 
+        fontSize: '1.5em', 
+        fontWeight: 'bold'
+      }}
+      >
+        {renderHangMan(props.word)}
+      </Typography>
       <br />
       <br />
       <Grid 
