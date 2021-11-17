@@ -11,7 +11,7 @@ import Grid from "@mui/material/Grid";
 
 function App(props) {
   const [bigScreen, setBigScreen] = useState(false);
-  const { openInstructions, setOpenInstructions, setOpenFinish, openFinish, setLose } = useContext(AppContext);
+  const { setOpenInstructions, setOpenFinish, setLose } = useContext(AppContext);
 
   const windowListener = () => {
     if(window.innerWidth > 960) {
@@ -32,7 +32,12 @@ function App(props) {
     if(index === abc.length - 2 || index === abc.length - 1) {
       return (
         <>
-          <Grid item xs={3} md={2} justify='center'>
+          <Grid 
+            item 
+            xs={3} 
+            md={2} 
+            justify='center'
+          >
             <Button
               key={index}
               color="primary" 
@@ -44,7 +49,11 @@ function App(props) {
               disabled={props.lettersCorrect.includes(letter) || props.lettersIncorrect.includes(letter) || props.isGameOver}
               sx={{
                 display: 'flex',
-                marginLeft: { xs: 9.1, sm: 12.5, md: 24.3}
+                marginLeft: { 
+                  xs: 9.1, 
+                  sm: 12.5, 
+                  md: 24.3
+                }
               }}
               >
                 {letter.toUpperCase()}
@@ -55,7 +64,12 @@ function App(props) {
     } else {
       return (
         <>
-          <Grid item xs={3} md={2} justify='center'> {/* xs sm md lg xl */}
+          <Grid 
+            item 
+            xs={3} 
+            md={2} 
+            justify='center'
+          > 
             <Button
               key={index}
               color="primary" 
@@ -66,7 +80,9 @@ function App(props) {
               onClick={() => props.guessLetter(letter)}
               disabled={props.lettersCorrect.includes(letter) || props.lettersIncorrect.includes(letter) || props.isGameOver}
               sx={{
-                marginLeft: { md: 1}
+                marginLeft: { 
+                  md: 1
+                }
               }}
               >
                 {letter.toUpperCase()}
@@ -76,7 +92,7 @@ function App(props) {
       )
     }
   });
-  let renderHangMan = (word) => word.split("").map((letter, index) => {
+  let renderHangMan = (word) => word.split("").map(letter => {
     return !props.lettersCorrect.includes(letter) 
             ? 
             <span className={ bigScreen ? "guesses" : 'mobile-guess'}>_ </span> 
@@ -100,11 +116,13 @@ function App(props) {
   
 
   return (
-    <Container maxWidth="sm" className="game">
+    <Container 
+      maxWidth="sm" 
+      className="game"
+    >
       <Typography 
         variant='h1'
         sx={{
-          // color: '#FFF',
           fontFamily: 'Exo, sans-serif',
           zIndex: 21,
           fontSize: {
@@ -113,7 +131,10 @@ function App(props) {
           },
           position: 'relative',
           textAlign: 'center',
-          paddingTop: {xs: 6, md: 20}
+          paddingTop: {
+            xs: 6, 
+            md: 20
+          }
         }}
       >
         Welcome To Hangman
@@ -143,31 +164,37 @@ function App(props) {
       >
         Remaining Guesses: {props.limit() - props.numGuesses}
       </Typography>
-      <Grid
-        container 
-        justify="center"
-        alignItems="center" 
-      >
-        {/* <h1 
-          className={gameOverMsg() !== undefined ? gameOverMsg().toLowerCase() : "notDone"}
-          >
-            YOU {gameOverMsg()}
-        </h1> */}
-      </Grid>
       <Typography className="word" variant='h2' mt={3} sx={{ fontSize: '1.5em', fontWeight: 'bold'}}>{renderHangMan(props.word)}</Typography>
       <br />
       <br />
-      <Grid container spacing={1} mt={-4}>
+      <Grid 
+        container 
+        spacing={1} 
+        mt={-4}
+      >
         {renderLetterButtons(abc)}
         <Grid 
           container 
           justify="center"
           alignItems="center" 
         >
-          <Button sx={{margin: 'auto', marginTop: '20px', display: 'flex'}} variant="contained" color="error" size='large' onClick={() => props.resetGame()} > Reset </Button>
+          <Button 
+          sx={{
+            margin: 'auto', 
+            marginTop: '20px', 
+            display: 'flex'
+          }} 
+          variant="contained" 
+          color="error" 
+          size='large' 
+          onClick={() => props.resetGame()} > Reset </Button>
         </Grid>
       </Grid>
-      <EndModal message={gameOver()} reset={props.resetGame} word={props.word} />
+      <EndModal 
+        message={gameOver()} 
+        reset={props.resetGame} 
+        word={props.word} 
+      />
       <InstructionModal />      
     </Container>
     );

@@ -48,7 +48,6 @@ const EndModal = (props) => {
         <Fade in={openFinish}>
         <Box 
         sx={{
-            // backgroundColor: 'background.paper',
             color: (color ? '#FF0000' : '#33cc33'),
             textAlign: 'center',
             position: 'absolute',
@@ -58,14 +57,41 @@ const EndModal = (props) => {
             transform: 'translate(-50%, -50%)',
           }}
         >
-          <Typography id="modal-modal-title" className='modal-content' variant="h3" component="h2" sx={{fontWeight: 'bold', marginTop: {xs: 10, md: 0}}}>
+          <Typography 
+            id="modal-modal-title" 
+            className='modal-content' 
+            variant="h3" 
+            component="h2" 
+            sx={{
+              fontWeight: 'bold', 
+              marginTop: {
+                xs: 10, 
+                md: 0
+              }
+            }}
+          >
             YOU {message}!
           </Typography>
           <br/>
-          <Typography variant='h4' className='modal-content' sx={{ fontWeight: 'bold'}} mb={3}>
+          <Typography 
+            variant='h4' 
+            className='modal-content' 
+            sx={{ 
+              fontWeight: 'bold'
+            }} 
+            mb={3}
+          >
             {lose ? "The word was " + props.word.toUpperCase() : ''}
           </Typography>
-          <Button className='modal-content' variant='contained' color='success' sx={{marginBottom: '15px'}} onClick={playAgain}>
+          <Button 
+            className='modal-content' 
+            variant='contained' 
+            color='success' 
+            sx={{
+              marginBottom: '15px'
+            }} 
+            onClick={playAgain}
+          >
             Play Again!
           </Button>
         </Box>
