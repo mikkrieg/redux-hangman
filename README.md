@@ -13,18 +13,16 @@
 
 ## Description
 
-_This is a project built with a group of peers at Epicodus Coding Boot Camp. It is a slight variation on the classic game and fully playable. This project was built with React/Redux and styled with Material_UI. After graduating Epicodus I have edited and revamped the original version. _
+_This is a project built with a group of peers at Epicodus Coding Boot Camp. It is a slight variation on the classic game and fully playable. This project was built with React/Redux and styled with Material-UI. After graduating Epicodus I have edited and revamped the original version._
 
 ## Setup/Installation Requirements
 
 ### Local Machine
+
 * _Clone this repository to your machine_
-* _Navigate to the top level directory_
-* _Open index.html in your browser_
-
-## Known Bugs
-
-* __
+* _Navigate to the top level directory using a terminal_
+* _Run `npm install` in your terminal to install all necessary packages and dependencies_
+* _Run `npm start` in your terminal to run the application on localhost_
 
 ## License
 
