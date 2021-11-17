@@ -1,13 +1,17 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { connect } from "react-redux";
 import { guessLetter, resetGame } from "../redux/hangman";
 import Typography from '@mui/material/Typography';
 import Button from "@mui/material/Button";
 import Container from "@mui/material/Container";
+import EndModal from './EndModal.js';
+import InstructionModal from './InstructionModal';
+import { AppContext } from '../AppContext';
 import Grid from "@mui/material/Grid";
 
 function App(props) {
   const [bigScreen, setBigScreen] = useState(false);
+  const { openInstructions, setOpenInstructions, setOpenLoser, openLoser } = useContext(AppContext);
 
   const windowListener = () => {
     if(window.innerWidth > 960) {
@@ -20,7 +24,7 @@ function App(props) {
   window.onresize = windowListener;
 
   const openInstructionModal = () => {
-    
+    setOpenInstructions(true);
   }
 
   let abc = "abcdefghijklmnopqrstuvwxyz".split("");
@@ -74,9 +78,9 @@ function App(props) {
   let renderHangMan = (word) => word.split("").map(letter => {
     return !props.lettersCorrect.includes(letter) 
             ? 
-            <span className={ bigScreen ? "guesses grow" : 'mobile-guess'}>_ </span> 
+            <span className={ bigScreen ? "guesses" : 'mobile-guess'}>_ </span> 
             : 
-            <span className={ bigScreen ? "guesses grow" : 'mobile-guess'}>{letter.toUpperCase()}</span>;
+            <span className={ bigScreen ? "guesses" : 'mobile-guess'}>{letter.toUpperCase()}</span>;
   })
 
   let gameOverMsg = () => {
@@ -96,7 +100,6 @@ function App(props) {
       {console.log(gameOverMsg() !== undefined ? gameOverMsg().toLowerCase() : "notDone")}
       <Typography 
         variant='h1'
-        pt={4}
         sx={{
           // color: '#FFF',
           fontFamily: 'Exo, sans-serif',
@@ -106,7 +109,8 @@ function App(props) {
             md: '3em'
           },
           position: 'relative',
-          textAlign: 'center'
+          textAlign: 'center',
+          paddingTop: {xs: 6, md: 20}
         }}
       >
         Welcome To Hangman
@@ -124,14 +128,13 @@ function App(props) {
         Instructions
       </Button>
       <Typography
-        className={ bigScreen ? 'grow' : ''}
         variant='h1'
         mt={2}
         mb={-2}
         sx={{
           fontSize: {
             xs: '1.5em', 
-            md: '4em'
+            md: '3em'
           }
         }}
       >
@@ -160,7 +163,9 @@ function App(props) {
         >
           <Button sx={{margin: 'auto', marginTop: '10px', display: 'flex'}} variant="contained" color="error" onClick={() => props.resetGame()} > Reset </Button>
         </Grid>
-      </Grid>      
+      </Grid>
+      <EndModal />
+      <InstructionModal />      
     </Container>
     );
 }
