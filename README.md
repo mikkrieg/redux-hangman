@@ -33,3 +33,6 @@ Copyright(c) 2021 Michael Kriegel
 ## Contact Information
 
 Michael Kriegel: mikkrieg@gmail.com
+
+## Sources
+Icons made by [Freepik](https://www.freepik.com)from [Flaticon](https://www.flaticon.com/)
