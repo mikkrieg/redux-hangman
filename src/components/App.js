@@ -19,29 +19,57 @@ function App(props) {
 
   window.onresize = windowListener;
 
+  const openInstructionModal = () => {
+    
+  }
+
   let abc = "abcdefghijklmnopqrstuvwxyz".split("");
 
   let renderLetterButtons = (abc) => abc.map((letter, index) => {
-    
-    return (
-      <>
-        <Grid item xs={3} md={2}> {/* xs sm md lg xl */}
-          <Button
-            key={index}
-            color="primary" 
-            variant="contained" 
-            size= {bigScreen ? 'large' : 'small'} 
-            id={index} 
-            className="letter-btn"
-            onClick={() => props.guessLetter(letter)}
-            disabled={props.lettersCorrect.includes(letter) || props.lettersIncorrect.includes(letter) || props.isGameOver}
-            >
-              {letter.toUpperCase()}
-          </Button>
-        </Grid>
-      </>
-    )
-
+    if(index === abc.length - 2 || index === abc.length - 1) {
+      console.log('runs')
+      return (
+        <>
+          <Grid item xs={3} md={2}> {/* xs sm md lg xl */}
+            <Button
+              key={index}
+              color="primary" 
+              variant="contained" 
+              size= {bigScreen ? 'large' : 'small'} 
+              id={index} 
+              className="letter-btn"
+              onClick={() => props.guessLetter(letter)}
+              disabled={props.lettersCorrect.includes(letter) || props.lettersIncorrect.includes(letter) || props.isGameOver}
+              sx={{
+                display: 'flex',
+                marginLeft: { xs: 9, sm: 17.5, md: 23.5}
+              }}
+              >
+                {letter.toUpperCase()}
+            </Button>
+          </Grid>
+        </>
+      )
+    } else {
+      return (
+        <>
+          <Grid item xs={3} md={2}> {/* xs sm md lg xl */}
+            <Button
+              key={index}
+              color="primary" 
+              variant="contained" 
+              size= {bigScreen ? 'large' : 'small'} 
+              id={index} 
+              className="letter-btn"
+              onClick={() => props.guessLetter(letter)}
+              disabled={props.lettersCorrect.includes(letter) || props.lettersIncorrect.includes(letter) || props.isGameOver}
+              >
+                {letter.toUpperCase()}
+            </Button>
+          </Grid>
+        </>
+      )
+    }
   });
   let renderHangMan = (word) => word.split("").map(letter => {
     return !props.lettersCorrect.includes(letter) 
@@ -91,6 +119,7 @@ function App(props) {
           margin: 'auto',
           marginTop: '15px',
         }}
+        onClick={openInstructionModal}
       >
         Instructions
       </Button>

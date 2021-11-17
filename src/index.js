@@ -4,13 +4,15 @@ import App from './components/App';
 import { Provider } from "react-redux";
 import store from "./redux/reduxIndex";
 import "./css/App.css";
-import Background from "./components/Background"
+import Background from "./components/Background";
+import { AppProvider } from './AppContext.js';
 
 ReactDOM.render( 
-
-  <Provider store={store}>
-    <Background />
-    <App />
-  </Provider>,
+  <AppProvider>
+    <Provider store={store}>
+      <Background />
+      <App />
+    </Provider>
+  </AppProvider>,
   document.getElementById('root')
 );
