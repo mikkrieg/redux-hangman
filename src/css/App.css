@@ -61,6 +61,10 @@ h1 {
   margin: 1rem;
 }
 
+.mobile-guess {
+  margin: 5px;
+}
+
 .word {
   margin: 2rem 0 0 0;
   text-align: center;

@@ -30,7 +30,7 @@ function App(props) {
             key={index}
             color="primary" 
             variant="contained" 
-            size="large" 
+            size= {bigScreen ? 'large' : 'small'} 
             id={index} 
             className="letter-btn"
             onClick={() => props.guessLetter(letter)}
@@ -46,9 +46,9 @@ function App(props) {
   let renderHangMan = (word) => word.split("").map(letter => {
     return !props.lettersCorrect.includes(letter) 
             ? 
-            <span className="guesses grow">_ </span> 
+            <span className={ bigScreen ? "guesses grow" : 'mobile-guess'}>_ </span> 
             : 
-            <span className="guesses grow">{letter.toUpperCase()}</span>;
+            <span className={ bigScreen ? "guesses grow" : 'mobile-guess'}>{letter.toUpperCase()}</span>;
   })
 
   let gameOverMsg = () => {
@@ -70,7 +70,7 @@ function App(props) {
         variant='h1'
         pt={4}
         sx={{
-          color: '#FFF',
+          // color: '#FFF',
           fontFamily: 'Exo, sans-serif',
           zIndex: 21,
           fontSize: {
@@ -83,6 +83,17 @@ function App(props) {
       >
         Welcome To Hangman
       </Typography>
+      <Button
+        variant='contained'
+        size='small'
+        sx={{
+          display: 'flex',
+          margin: 'auto',
+          marginTop: '15px',
+        }}
+      >
+        Instructions
+      </Button>
       <Typography
         className={ bigScreen ? 'grow' : ''}
         variant='h1'
@@ -90,12 +101,12 @@ function App(props) {
         mb={-2}
         sx={{
           fontSize: {
-            xs: '2em', 
+            xs: '1.5em', 
             md: '4em'
           }
         }}
       >
-        Number of Guesses Remaining: {props.limit() - props.numGuesses}
+        Remaining Guesses: {props.limit() - props.numGuesses}
       </Typography>
       <Grid
         container 
@@ -108,18 +119,17 @@ function App(props) {
             YOU {gameOverMsg()}
         </h1>
       </Grid>
-     
-      <h2 className="word">{renderHangMan(props.word)}</h2>
+      <Typography className="word" variant='h2' mt={3} sx={{ fontSize: '1.5em', fontWeight: 'bold'}}>{renderHangMan(props.word)}</Typography>
       <br />
       <br />
-      <Grid container spacing={1}>
+      <Grid container spacing={1} mt={-4}>
         {renderLetterButtons(abc)}
         <Grid 
           container 
           justify="center"
           alignItems="center" 
         >
-          <Button variant="contained" color="secondary" onClick={() => props.resetGame()} > Reset </Button>
+          <Button sx={{margin: 'auto', marginTop: '10px', display: 'flex'}} variant="contained" color="error" onClick={() => props.resetGame()} > Reset </Button>
         </Grid>
       </Grid>      
     </Container>
@@ -128,9 +138,9 @@ function App(props) {
 
 function mapStateToProps(state) {
   return {
-    word: state.word, // [e, etc]
+    word: state.word, 
     numGuesses: state.numGuesses,
-    lettersCorrect: state.lettersCorrect, //[]
+    lettersCorrect: state.lettersCorrect, 
     isGameOver: state.isGameOver,
     limit: state.limit,
     lettersIncorrect: state.lettersIncorrect,
