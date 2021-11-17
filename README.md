@@ -2,6 +2,7 @@
 
 #### By _**Michael Kriegel, Morgan Bradford, Connor Burgess and Tien Nguyen**_
 #### Expanded Upon By **Michael Kriegel**
+#### Deployed on: [Netlify](https://redux-hangman.netlify.app/)
 
 ## Technologies Used
 
