@@ -20,7 +20,6 @@ function App(props) {
       setBigScreen(false);
     }
   }
-  console.log(window.innerWidth)
   window.onresize = windowListener;
 
   const openInstructionModal = () => {
@@ -31,7 +30,6 @@ function App(props) {
 
   let renderLetterButtons = (abc) => abc.map((letter, index) => {
     if(index === abc.length - 2 || index === abc.length - 1) {
-      console.log('runs')
       return (
         <>
           <Grid item xs={3} md={2} justify='center'>
@@ -78,7 +76,7 @@ function App(props) {
       )
     }
   });
-  let renderHangMan = (word) => word.split("").map(letter => {
+  let renderHangMan = (word) => word.split("").map((letter, index) => {
     return !props.lettersCorrect.includes(letter) 
             ? 
             <span className={ bigScreen ? "guesses" : 'mobile-guess'}>_ </span> 
@@ -103,8 +101,6 @@ function App(props) {
 
   return (
     <Container maxWidth="sm" className="game">
-      {console.log(props)}
-      {/* {console.log(gameOverMsg() !== undefined ? gameOverMsg().toLowerCase() : "notDone")} */}
       <Typography 
         variant='h1'
         sx={{
