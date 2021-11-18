@@ -14,6 +14,7 @@ const InstructionModal = () => {
 
   return (
     <Modal
+    lassName='modal-highlight'
     aria-labelledby="transition-modal-title"
     aria-describedby="transition-modal-description"
     open={openInstructions}
