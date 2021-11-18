@@ -37,11 +37,6 @@ function App(props) {
             xs={3} 
             md={2} 
             justify='center'
-            sx={{
-              paddingLeft: {
-                xs: '20px'
-              }
-            }}
           >
             <Button
               key={index}
@@ -52,14 +47,6 @@ function App(props) {
               className="letter-btn"
               onClick={() => props.guessLetter(letter)}
               disabled={props.lettersCorrect.includes(letter) || props.lettersIncorrect.includes(letter) || props.isGameOver}
-              sx={{
-                // justifyContent: 'in-between',
-                // marginLeft: { 
-                //   xs: 9.1, 
-                //   sm: 12.5, 
-                //   md: 24.3
-                // }
-              }}
               >
                 {letter.toUpperCase()}
             </Button>
@@ -74,11 +61,6 @@ function App(props) {
             xs={3} 
             md={2} 
             justify='center'
-            sx={{
-              paddingLeft: {
-                xs: '200px'
-              }
-            }}
           > 
             <Button
               key={index}
@@ -89,11 +71,6 @@ function App(props) {
               className="letter-btn"
               onClick={() => props.guessLetter(letter)}
               disabled={props.lettersCorrect.includes(letter) || props.lettersIncorrect.includes(letter) || props.isGameOver}
-              sx={{
-                // marginLeft: { 
-                //   md: 1
-                // }
-              }}
               >
                 {letter.toUpperCase()}
             </Button>
