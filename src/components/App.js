@@ -37,6 +37,11 @@ function App(props) {
             xs={3} 
             md={2} 
             justify='center'
+            sx={{
+              paddingLeft: {
+                xs: '20px'
+              }
+            }}
           >
             <Button
               key={index}
@@ -48,12 +53,12 @@ function App(props) {
               onClick={() => props.guessLetter(letter)}
               disabled={props.lettersCorrect.includes(letter) || props.lettersIncorrect.includes(letter) || props.isGameOver}
               sx={{
-                display: 'flex',
-                marginLeft: { 
-                  xs: 9.1, 
-                  sm: 12.5, 
-                  md: 24.3
-                }
+                // justifyContent: 'in-between',
+                // marginLeft: { 
+                //   xs: 9.1, 
+                //   sm: 12.5, 
+                //   md: 24.3
+                // }
               }}
               >
                 {letter.toUpperCase()}
@@ -69,6 +74,11 @@ function App(props) {
             xs={3} 
             md={2} 
             justify='center'
+            sx={{
+              paddingLeft: {
+                xs: '200px'
+              }
+            }}
           > 
             <Button
               key={index}
@@ -80,9 +90,9 @@ function App(props) {
               onClick={() => props.guessLetter(letter)}
               disabled={props.lettersCorrect.includes(letter) || props.lettersIncorrect.includes(letter) || props.isGameOver}
               sx={{
-                marginLeft: { 
-                  md: 1
-                }
+                // marginLeft: { 
+                //   md: 1
+                // }
               }}
               >
                 {letter.toUpperCase()}
@@ -118,7 +128,6 @@ function App(props) {
   return (
     <Container 
       maxWidth="sm" 
-      className="game"
     >
       <Typography 
         variant='h1'
@@ -178,28 +187,31 @@ function App(props) {
       <br />
       <br />
       <Grid 
-        container 
+        container
+        justifyContent='center'
+        alignItems='center'
         spacing={1} 
         mt={-4}
+        sx={{
+          paddingLeft: '20px'
+        }}
       >
         {renderLetterButtons(abc)}
-        <Grid 
+      </Grid>
+      <Grid 
           container 
-          justify="center"
+          justifyContent="center"
           alignItems="center" 
         >
           <Button 
           sx={{
-            margin: 'auto', 
             marginTop: '20px', 
-            display: 'flex'
           }} 
           variant="contained" 
           color="error" 
           size='large' 
           onClick={() => props.resetGame()} > Reset </Button>
         </Grid>
-      </Grid>
       <EndModal 
         message={gameOver()} 
         reset={props.resetGame} 
